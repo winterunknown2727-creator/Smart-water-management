@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Dashboard | Smart Water Management</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#020814;
+    color:white;
+    min-height:100vh;
+}
+
+/* NAVBAR */
+
+.navbar{
+    min-height:72px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:12px 5%;
+
+    background:#031426;
+    border-bottom:2px solid #087cff;
+
+    position:sticky;
+    top:0;
+    z-index:10;
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.brand-icon{
+    width:42px;
+    height:42px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:#06264a;
+    border:2px solid #00ff88;
+    border-radius:12px;
+}
+
+.brand-name{
+    font-size:17px;
+    font-weight:bold;
+}
+
+.brand-team{
+    color:#00ff88;
+    font-size:9px;
+    letter-spacing:2px;
+    margin-top:3px;
+}
+
+.logout{
+    padding:9px 15px;
+    border-radius:9px;
+
+    background:transparent;
+    border:1px solid #ff5363;
+
+    color:#ff6876;
+    cursor:pointer;
+}
+
+/* MAIN */
+
+.container{
+    width:92%;
+    max-width:1200px;
+    margin:auto;
+    padding:28px 0 50px;
+}
+
+.heading{
+    margin-bottom:25px;
+}
+
+.heading h1{
+    font-size:28px;
+}
+
+.heading p{
+    color:#8099b0;
+    font-size:13px;
+    margin-top:7px;
+}
+
+/* CONNECTION STATUS */
+
+.status-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:14px;
+    margin-bottom:25px;
+}
+
+.status-card{
+    background:#06172a;
+    border:1px solid #124c77;
+    border-radius:16px;
+    padding:19px;
+}
+
+.status-icon{
+    font-size:23px;
+    margin-bottom:12px;
+}
+
+.status-card h3{
+    font-size:13px;
+    color:#b5c9dc;
+    margin-bottom:8px;
+}
+
+.waiting{
+    color:#ffd166;
+    font-size:12px;
+}
+
+.connected{
+    color:#00ff88;
+    font-size:12px;
+}
+
+.lost{
+    color:#ff5968;
+    font-size:12px;
+}
+
+/* SUMMARY */
+
+.summary-title{
+    margin:28px 0 14px;
+    font-size:18px;
+}
+
+.summary-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:14px;
+}
+
+.summary-card{
+    padding:20px;
+    border-radius:16px;
+    background:#06172a;
+    border:1px solid #124c77;
+}
+
+.summary-card h3{
+    color:#829bb1;
+    font-size:12px;
+    margin-bottom:10px;
+}
+
+.summary-value{
+    font-size:27px;
+    font-weight:bold;
+}
+
+.summary-small{
+    color:#657e95;
+    font-size:11px;
+    margin-top:6px;
+}
+
+/* ACTIONS */
+
+.action-title{
+    margin:30px 0 14px;
+    font-size:18px;
+}
+
+.actions{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+}
+
+.action{
+    padding:22px;
+    background:#06172a;
+    border:1px solid #124c77;
+    border-radius:17px;
+    text-decoration:none;
+    color:white;
+    transition:.2s;
+}
+
+.action:hover{
+    border-color:#00ff88;
+    transform:translateY(-3px);
+    box-shadow:0 0 22px rgba(0,255,136,.12);
+}
+
+.action-icon{
+    font-size:30px;
+    margin-bottom:12px;
+}
+
+.action h3{
+    font-size:16px;
+    margin-bottom:7px;
+}
+
+.action p{
+    color:#758da3;
+    font-size:11px;
+    line-height:1.5;
+}
+
+/* HARDWARE NOTICE */
+
+.notice{
+    margin-top:25px;
+    padding:18px;
+
+    background:#061426;
+
+    border-left:4px solid #ffd166;
+
+    border-radius:10px;
+
+    color:#a0b3c4;
+
+    font-size:12px;
+
+    line-height:1.6;
+}
+
+.notice strong{
+    color:#ffd166;
+}
+
+/* FOOTER */
+
+footer{
+    text-align:center;
+    padding:20px;
+    color:#4f687e;
+    font-size:10px;
+}
+
+/* MOBILE */
+
+@media(max-width:850px){
+
+    .status-grid,
+    .summary-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .actions{
+        grid-template-columns:1fr;
+    }
+
+}
+
+@media(max-width:550px){
+
+    .status-grid,
+    .summary-grid{
+        grid-template-columns:1fr;
+    }
+
+    .heading h1{
+        font-size:23px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+
+<!-- NAVBAR -->
+
+<nav class="navbar">
+
+<div class="brand">
+
+<div class="brand-icon">
+💧
+</div>
+
+<div>
+
+<div class="brand-name">
+SMART WATER
+</div>
+
+<div class="brand-team">
+BLUE STAR
+</div>
+
+</div>
+
+</div>
+
+
+<button
+class="logout"
+onclick="logout()"
+>
+LOGOUT
+</button>
+
+</nav>
+
+
+<!-- MAIN -->
+
+<main class="container">
+
+
+<div class="heading">
+
+<h1>
+Water Management Dashboard
+</h1>
+
+<p>
+ESP32 • LoRa • Live Sensor Monitoring • Motor Control
+</p>
+
+</div>
+
+
+<!-- CONNECTION STATUS -->
+
+<div class="status-grid">
+
+
+<div class="status-card">
+
+<div class="status-icon">
+⚡
+</div>
+
+<h3>
+ESP32
+</h3>
+
+<p
+id="espStatus"
+class="waiting"
+>
+● Waiting for Connection
+</p>
+
+</div>
+
+
+<div class="status-card">
+
+<div class="status-icon">
+📡
+</div>
+
+<h3>
+LoRa Network
+</h3>
+
+<p
+id="loraStatus"
+class="waiting"
+>
+● Waiting for Connection
+</p>
+
+</div>
+
+
+<div class="status-card">
+
+<div class="status-icon">
+💧
+</div>
+
+<h3>
+Sensor Data
+</h3>
+
+<p
+id="sensorStatus"
+class="waiting"
+>
+● Waiting for Data
+</p>
+
+</div>
+
+
+<div class="status-card">
+
+<div class="status-icon">
+🔌
+</div>
+
+<h3>
+System
+</h3>
+
+<p
+id="systemStatus"
+class="waiting"
+>
+● Waiting for Hardware
+</p>
+
+</div>
+
+
+</div>
+
+
+<!-- SUMMARY -->
+
+<div class="summary-title">
+System Overview
+</div>
+
+
+<div class="summary-grid">
+
+
+<div class="summary-card">
+
+<h3>
+TOTAL TANKS
+</h3>
+
+<div
+class="summary-value"
+id="tankCount"
+>
+0
+</div>
+
+<div class="summary-small">
+Configured tanks
+</div>
+
+</div>
+
+
+<div class="summary-card">
+
+<h3>
+TOTAL MOTORS
+</h3>
+
+<div
+class="summary-value"
+id="motorCount"
+>
+0
+</div>
+
+<div class="summary-small">
+Configured motors
+</div>
+
+</div>
+
+
+<div class="summary-card">
+
+<h3>
+WATER LEVEL
+</h3>
+
+<div
+class="summary-value"
+id="waterLevel"
+>
+--
+</div>
+
+<div class="summary-small">
+Waiting for sensor
+</div>
+
+</div>
+
+
+<div class="summary-card">
+
+<h3>
+ACTIVE MOTORS
+</h3>
+
+<div
+class="summary-value"
+id="activeMotors"
+>
+0
+</div>
+
+<div class="summary-small">
+Currently running
+</div>
+
+</div>
+
+
+</div>
+
+
+<!-- ACTIONS -->
+
+<div class="action-title">
+Management
+</div>
+
+
+<div class="actions">
+
+
+<a
+href="tanks.html"
+class="action"
+>
+
+<div class="action-icon">
+💧
+</div>
+
+<h3>
+Tank Management
+</h3>
+
+<p>
+Add, edit and monitor multiple water tanks.
+</p>
+
+</a>
+
+
+<a
+href="motors.html"
+class="action"
+>
+
+<div class="action-icon">
+⚙️
+</div>
+
+<h3>
+Motor Management
+</h3>
+
+<p>
+Manage multiple pumps and motor controls.
+</p>
+
+</a>
+
+
+<a
+href="hardware.html"
+class="action"
+>
+
+<div class="action-icon">
+🔌
+</div>
+
+<h3>
+Hardware Connection
+</h3>
+
+<p>
+Check ESP32, LoRa and sensor connectivity.
+</p>
+
+</a>
+
+
+</div>
+
+
+<!-- NOTICE -->
+
+<div class="notice">
+
+<strong>Hardware Status:</strong>
+
+The dashboard will show live data only when the
+ESP32, LoRa network and sensors are actually
+connected and communicating.
+
+No fake connection status is displayed.
+
+</div>
+
+
+</main>
+
+
+<footer>
+
+BLUE STAR • Smart Water Management System
+
+</footer>
+
+
+<script>
+
+/*
+IMPORTANT
+
+This page does NOT create fake hardware connection.
+
+Later we will connect:
+
+Website
+   ↓
+API / Network
+   ↓
+ESP32
+   ↓
+LoRa
+   ↓
+Float Sensor / Relay
+   ↓
+Motor
+
+Only then will these statuses become green.
+*/
+
+
+function logout(){
+
+    window.location.href =
+    "login.html";
+
+}
+
+
+/*
+Future real-time connection function.
+
+We will connect this later to
+the actual ESP32/API.
+
+Example future states:
+
+ESP32:
+🟡 Waiting
+🟢 Connected
+🔴 Connection Lost
+
+LoRa:
+🟡 Waiting
+🟢 Connected
+🔴 Connection Lost
+
+Sensor:
+🟡 Waiting
+🟢 Receiving
+🔴 No Data
+*/
+
+function hardwareWaiting(){
+
+    document.getElementById("espStatus").textContent =
+    "● Waiting for Connection";
+
+    document.getElementById("loraStatus").textContent =
+    "● Waiting for Connection";
+
+    document.getElementById("sensorStatus").textContent =
+    "● Waiting for Data";
+
+    document.getElementById("systemStatus").textContent =
+    "● Waiting for Hardware";
+
+}
+
+
+hardwareWaiting();
+
+</script>
+
+</body>
+</html>

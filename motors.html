@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Motor Management | Smart Water Management</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:#031522;
+    color:white;
+    min-height:100vh;
+}
+
+nav{
+    height:70px;
+    background:#061d2e;
+    border-bottom:2px solid #00d084;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 7%;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.logo-icon{
+    width:40px;
+    height:40px;
+    border-radius:12px;
+    background:#00d084;
+    color:#031522;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:22px;
+    font-weight:bold;
+}
+
+.logo h2{
+    font-size:18px;
+    letter-spacing:1px;
+}
+
+.logo span{
+    color:#00d084;
+}
+
+.nav-right a{
+    color:#b9d4dc;
+    text-decoration:none;
+    margin-left:20px;
+    font-size:14px;
+}
+
+.nav-right a:hover{
+    color:#00d084;
+}
+
+.container{
+    width:86%;
+    max-width:1200px;
+    margin:40px auto;
+}
+
+.top-section{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:30px;
+}
+
+.back{
+    color:#9bb7c1;
+    text-decoration:none;
+    font-size:14px;
+}
+
+.back:hover{
+    color:#00d084;
+}
+
+h1{
+    margin-top:12px;
+    font-size:34px;
+}
+
+.subtitle{
+    color:#8daab5;
+    margin-top:8px;
+}
+
+.add-btn{
+    background:#00d084;
+    color:#031522;
+    border:none;
+    padding:14px 20px;
+    border-radius:10px;
+    font-weight:bold;
+    cursor:pointer;
+    box-shadow:0 0 20px rgba(0,208,132,.18);
+}
+
+.add-btn:hover{
+    background:#18e99a;
+}
+
+.motor-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:22px;
+}
+
+.motor-card{
+    background:linear-gradient(145deg,#09283b,#061b2a);
+    border:1px solid #16465a;
+    border-radius:18px;
+    padding:24px;
+    box-shadow:0 15px 35px rgba(0,0,0,.25);
+}
+
+.motor-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+
+.motor-title{
+    font-size:21px;
+    font-weight:bold;
+}
+
+.motor-id{
+    color:#00d084;
+    font-size:12px;
+    margin-top:5px;
+}
+
+.status{
+    border:1px solid #66757c;
+    color:#b9c5c9;
+    padding:7px 10px;
+    border-radius:20px;
+    font-size:11px;
+}
+
+.info{
+    border-top:1px solid #173e4d;
+    padding-top:15px;
+}
+
+.info-row{
+    display:flex;
+    justify-content:space-between;
+    padding:8px 0;
+    color:#9db6bf;
+    font-size:13px;
+}
+
+.info-row strong{
+    color:#e7f4f7;
+    text-align:right;
+}
+
+.controls{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:9px;
+    margin-top:18px;
+}
+
+.control-btn{
+    padding:11px;
+    border-radius:9px;
+    border:1px solid #315361;
+    background:#092332;
+    color:white;
+    cursor:pointer;
+    font-weight:bold;
+    font-size:12px;
+}
+
+.control-btn:hover{
+    border-color:#00d084;
+    color:#00d084;
+}
+
+.auto{
+    grid-column:span 2;
+}
+
+.delete-btn{
+    width:100%;
+    margin-top:12px;
+    padding:10px;
+    border-radius:9px;
+    border:1px solid #5d3940;
+    background:#25171b;
+    color:#ff9ca8;
+    cursor:pointer;
+}
+
+.empty{
+    text-align:center;
+    padding:70px 20px;
+    border:1px dashed #315361;
+    border-radius:18px;
+    color:#78939d;
+}
+
+.empty-icon{
+    font-size:45px;
+    margin-bottom:15px;
+}
+
+/* MODAL */
+
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.75);
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    z-index:100;
+}
+
+.modal-box{
+    width:100%;
+    max-width:520px;
+    background:#071e2e;
+    border:1px solid #00d084;
+    border-radius:20px;
+    padding:28px;
+    max-height:90vh;
+    overflow:auto;
+}
+
+.modal-box h2{
+    margin-bottom:8px;
+}
+
+.modal-sub{
+    color:#819da7;
+    font-size:13px;
+    margin-bottom:22px;
+}
+
+.form-group{
+    margin-bottom:15px;
+}
+
+.form-group label{
+    display:block;
+    color:#a8c0c8;
+    font-size:13px;
+    margin-bottom:7px;
+}
+
+.form-group input,
+.form-group select{
+    width:100%;
+    padding:12px;
+    background:#041724;
+    color:white;
+    border:1px solid #285061;
+    border-radius:9px;
+    outline:none;
+}
+
+.form-group input:focus,
+.form-group select:focus{
+    border-color:#00d084;
+}
+
+.modal-buttons{
+    display:flex;
+    gap:10px;
+    margin-top:20px;
+}
+
+.save-btn,
+.cancel-btn{
+    flex:1;
+    padding:13px;
+    border-radius:9px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.save-btn{
+    border:none;
+    background:#00d084;
+    color:#031522;
+}
+
+.cancel-btn{
+    border:1px solid #405965;
+    background:#102a38;
+    color:white;
+}
+
+@media(max-width:650px){
+    nav{
+        padding:0 5%;
+    }
+
+    .nav-right a{
+        margin-left:8px;
+    }
+
+    .container{
+        width:92%;
+    }
+
+    .top-section{
+        align-items:flex-start;
+        gap:15px;
+    }
+
+    h1{
+        font-size:28px;
+    }
+
+    .add-btn{
+        padding:11px 14px;
+        white-space:nowrap;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+    <div class="logo">
+        <div class="logo-icon">💧</div>
+        <h2>SMART <span>WATER</span></h2>
+    </div>
+
+    <div class="nav-right">
+        <a href="dashboard.html">Dashboard</a>
+        <a href="tanks.html">Tanks</a>
+    </div>
+</nav>
+
+
+<div class="container">
+
+    <div class="top-section">
+
+        <div>
+            <a href="dashboard.html" class="back">← Back to Dashboard</a>
+
+            <h1>Motor Management</h1>
+
+            <p class="subtitle">
+                Manage multiple motors, relays and solenoid valves
+            </p>
+        </div>
+
+        <button class="add-btn" onclick="openModal()">
+            ＋ ADD MOTOR
+        </button>
+
+    </div>
+
+
+    <div id="motorGrid" class="motor-grid"></div>
+
+</div>
+
+
+<!-- ADD MOTOR MODAL -->
+
+<div class="modal" id="motorModal">
+
+    <div class="modal-box">
+
+        <h2>Add New Motor</h2>
+
+        <p class="modal-sub">
+            Enter the hardware configuration for this motor.
+        </p>
+
+
+        <div class="form-group">
+            <label>Motor Name</label>
+            <input type="text" id="motorName" placeholder="Example: Main Motor">
+        </div>
+
+
+        <div class="form-group">
+            <label>Motor ID</label>
+            <input type="text" id="motorId" placeholder="Example: MOTOR-01">
+        </div>
+
+
+        <div class="form-group">
+            <label>Assigned Tank</label>
+            <select id="tankSelect">
+                <option value="">Select Tank</option>
+            </select>
+        </div>
+
+
+        <div class="form-group">
+            <label>ESP32 ID</label>
+            <input type="text" id="espId" placeholder="Example: ESP32-M01">
+        </div>
+
+
+        <div class="form-group">
+            <label>LoRa Receiver ID</label>
+            <input type="text" id="loraId" placeholder="Example: LORA-R01">
+        </div>
+
+
+        <div class="form-group">
+            <label>Relay Channel</label>
+            <input type="text" id="relay" placeholder="Example: RELAY-01 / CH1">
+        </div>
+
+
+        <div class="form-group">
+            <label>Solenoid Valve ID</label>
+            <input type="text" id="valve" placeholder="Example: VALVE-01">
+        </div>
+
+
+        <div class="modal-buttons">
+
+            <button class="cancel-btn" onclick="closeModal()">
+                CANCEL
+            </button>
+
+            <button class="save-btn" onclick="saveMotor()">
+                SAVE MOTOR
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+let motors = JSON.parse(localStorage.getItem("blueStarMotors")) || [];
+
+let tanks = JSON.parse(localStorage.getItem("blueStarTanks")) || [];
+
+const grid = document.getElementById("motorGrid");
+
+
+// LOAD TANKS INTO DROPDOWN
+
+function loadTanks(){
+
+    const select = document.getElementById("tankSelect");
+
+    select.innerHTML = '<option value="">Select Tank</option>';
+
+    tanks.forEach((tank,index)=>{
+
+        const option = document.createElement("option");
+
+        option.value = index;
+
+        option.textContent =
+            tank.name + " (" + tank.id + ")";
+
+        select.appendChild(option);
+
+    });
+
+}
+
+
+// DISPLAY MOTORS
+
+function displayMotors(){
+
+    grid.innerHTML = "";
+
+    if(motors.length === 0){
+
+        grid.innerHTML = `
+            <div class="empty" style="grid-column:1/-1">
+
+                <div class="empty-icon">⚙️</div>
+
+                <h2>No Motors Added</h2>
+
+                <p style="margin-top:8px">
+                    Add your first motor configuration.
+                </p>
+
+            </div>
+        `;
+
+        return;
+    }
+
+
+    motors.forEach((motor,index)=>{
+
+        const card = document.createElement("div");
+
+        card.className = "motor-card";
+
+        card.innerHTML = `
+
+            <div class="motor-header">
+
+                <div>
+
+                    <div class="motor-title">
+                        ${motor.name}
+                    </div>
+
+                    <div class="motor-id">
+                        ${motor.id}
+                    </div>
+
+                </div>
+
+                <div class="status">
+                    WAITING
+                </div>
+
+            </div>
+
+
+            <div class="info">
+
+                <div class="info-row">
+                    <span>Assigned Tank</span>
+                    <strong>${motor.tank}</strong>
+                </div>
+
+                <div class="info-row">
+                    <span>ESP32</span>
+                    <strong>${motor.esp}</strong>
+                </div>
+
+                <div class="info-row">
+                    <span>LoRa Receiver</span>
+                    <strong>${motor.lora}</strong>
+                </div>
+
+                <div class="info-row">
+                    <span>Relay</span>
+                    <strong>${motor.relay}</strong>
+                </div>
+
+                <div class="info-row">
+                    <span>Solenoid Valve</span>
+                    <strong>${motor.valve}</strong>
+                </div>
+
+            </div>
+
+
+            <div class="controls">
+
+                <button class="control-btn"
+                    onclick="motorControl('ON')">
+                    MOTOR ON
+                </button>
+
+                <button class="control-btn"
+                    onclick="motorControl('OFF')">
+                    MOTOR OFF
+                </button>
+
+                <button class="control-btn auto"
+                    onclick="motorControl('AUTO')">
+                    AUTOMATIC CONTROL
+                </button>
+
+            </div>
+
+
+            <button class="delete-btn"
+                onclick="deleteMotor(${index})">
+                DELETE MOTOR
+            </button>
+
+        `;
+
+        grid.appendChild(card);
+
+    });
+
+}
+
+
+// OPEN MODAL
+
+function openModal(){
+
+    document.getElementById("motorModal").style.display = "flex";
+
+    loadTanks();
+
+}
+
+
+// CLOSE MODAL
+
+function closeModal(){
+
+    document.getElementById("motorModal").style.display = "none";
+
+}
+
+
+// SAVE MOTOR
+
+function saveMotor(){
+
+    const name =
+        document.getElementById("motorName").value.trim();
+
+    const id =
+        document.getElementById("motorId").value.trim();
+
+    const tankIndex =
+        document.getElementById("tankSelect").value;
+
+    const esp =
+        document.getElementById("espId").value.trim();
+
+    const lora =
+        document.getElementById("loraId").value.trim();
+
+    const relay =
+        document.getElementById("relay").value.trim();
+
+    const valve =
+        document.getElementById("valve").value.trim();
+
+
+    if(!name || !id || !esp || !lora || !relay || !valve){
+
+        alert("Please fill all motor details.");
+
+        return;
+    }
+
+
+    let tankName = "Not Assigned";
+
+
+    if(tankIndex !== ""){
+
+        tankName =
+            tanks[tankIndex].name +
+            " (" +
+            tanks[tankIndex].id +
+            ")";
+
+    }
+
+
+    const newMotor = {
+
+        name:name,
+
+        id:id,
+
+        tank:tankName,
+
+        esp:esp,
+
+        lora:lora,
+
+        relay:relay,
+
+        valve:valve
+
+    };
+
+
+    motors.push(newMotor);
+
+
+    localStorage.setItem(
+        "blueStarMotors",
+        JSON.stringify(motors)
+    );
+
+
+    closeModal();
+
+    clearForm();
+
+    displayMotors();
+
+}
+
+
+// CLEAR FORM
+
+function clearForm(){
+
+    document.getElementById("motorName").value = "";
+
+    document.getElementById("motorId").value = "";
+
+    document.getElementById("tankSelect").value = "";
+
+    document.getElementById("espId").value = "";
+
+    document.getElementById("loraId").value = "";
+
+    document.getElementById("relay").value = "";
+
+    document.getElementById("valve").value = "";
+
+}
+
+
+// MOTOR CONTROL
+
+function motorControl(action){
+
+    alert(
+        "Hardware is not connected yet.\n\n" +
+        "Command: MOTOR " + action +
+        "\n\nReal motor control will work after ESP32 + LoRa + Relay connection."
+    );
+
+}
+
+
+// DELETE MOTOR
+
+function deleteMotor(index){
+
+    if(confirm("Delete this motor configuration?")){
+
+        motors.splice(index,1);
+
+        localStorage.setItem(
+            "blueStarMotors",
+            JSON.stringify(motors)
+        );
+
+        displayMotors();
+
+    }
+
+}
+
+
+// INITIAL LOAD
+
+displayMotors();
+
+</script>
+
+</body>
+</html>

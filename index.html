@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Smart Water Management System | BLUE STAR</title>
+
+<meta name="description"
+content="BLUE STAR Smart Water Management System using ESP32, LoRa and intelligent water monitoring.">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    min-height:100vh;
+    background:#020814;
+    color:white;
+}
+
+header{
+    height:75px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:0 7%;
+    background:#031326;
+    border-bottom:2px solid #087cff;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    font-size:19px;
+    font-weight:bold;
+}
+
+.logo-icon{
+    width:42px;
+    height:42px;
+    border-radius:12px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#06264a;
+    border:2px solid #00ff88;
+}
+
+.team{
+    color:#00ff88;
+    font-size:12px;
+    letter-spacing:3px;
+}
+
+.hero{
+    min-height:calc(100vh - 75px);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:40px 20px;
+
+    background:
+    radial-gradient(circle at 50% 20%,
+    #073967 0%,
+    #020814 48%,
+    #01040a 100%);
+}
+
+.hero-content{
+    max-width:850px;
+}
+
+.badge{
+    display:inline-block;
+    padding:8px 18px;
+    border:1px solid #00ff88;
+    border-radius:30px;
+    color:#00ff88;
+    font-size:12px;
+    letter-spacing:2px;
+    margin-bottom:25px;
+}
+
+.hero h1{
+    font-size:clamp(36px,7vw,72px);
+    line-height:1.05;
+    margin-bottom:20px;
+}
+
+.hero h1 span{
+    color:#00ff88;
+}
+
+.hero p{
+    max-width:700px;
+    margin:auto;
+    color:#9db3c8;
+    line-height:1.7;
+    font-size:16px;
+}
+
+.buttons{
+    margin-top:35px;
+    display:flex;
+    justify-content:center;
+    gap:15px;
+    flex-wrap:wrap;
+}
+
+.btn{
+    padding:15px 30px;
+    border-radius:12px;
+    text-decoration:none;
+    font-weight:bold;
+    transition:.2s;
+}
+
+.primary{
+    background:linear-gradient(90deg,#006eff,#00d978);
+    color:white;
+}
+
+.secondary{
+    border:1px solid #087cff;
+    color:white;
+    background:#061a31;
+}
+
+.btn:hover{
+    transform:translateY(-2px);
+    box-shadow:0 0 25px rgba(0,255,136,.2);
+}
+
+.features{
+    margin-top:55px;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:14px;
+}
+
+.feature{
+    padding:20px 12px;
+    background:rgba(5,22,42,.8);
+    border:1px solid #124d78;
+    border-radius:15px;
+}
+
+.feature-icon{
+    font-size:28px;
+    margin-bottom:10px;
+}
+
+.feature h3{
+    font-size:14px;
+    margin-bottom:6px;
+}
+
+.feature p{
+    color:#718ba3;
+    font-size:11px;
+}
+
+footer{
+    position:absolute;
+    bottom:15px;
+    width:100%;
+    text-align:center;
+    color:#526b81;
+    font-size:11px;
+}
+
+@media(max-width:700px){
+
+    header{
+        padding:0 20px;
+    }
+
+    .team{
+        font-size:10px;
+    }
+
+    .features{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">
+    <div class="logo-icon">💧</div>
+    <div>
+        SMART WATER
+    </div>
+</div>
+
+<div class="team">
+    BLUE STAR
+</div>
+
+</header>
+
+
+<section class="hero">
+
+<div class="hero-content">
+
+<div class="badge">
+    ESP32 • LoRa • SMART MONITORING
+</div>
+
+<h1>
+SMART WATER<br>
+<span>MANAGEMENT SYSTEM</span>
+</h1>
+
+<p>
+An intelligent water monitoring and management
+system using ESP32, LoRa communication,
+float sensors, relay modules, solenoid valves
+and automated motor control.
+</p>
+
+
+<div class="buttons">
+
+<a href="login.html" class="btn primary">
+    GET STARTED →
+</a>
+
+<a href="login.html" class="btn secondary">
+    LOGIN
+</a>
+
+</div>
+
+
+<div class="features">
+
+<div class="feature">
+<div class="feature-icon">💧</div>
+<h3>LIVE WATER</h3>
+<p>Monitor tank water levels</p>
+</div>
+
+<div class="feature">
+<div class="feature-icon">📡</div>
+<h3>LoRa</h3>
+<p>Long range communication</p>
+</div>
+
+<div class="feature">
+<div class="feature-icon">⚡</div>
+<h3>ESP32</h3>
+<p>Smart controller</p>
+</div>
+
+<div class="feature">
+<div class="feature-icon">⚙️</div>
+<h3>MOTOR CONTROL</h3>
+<p>Automatic pump management</p>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<footer>
+© 2026 BLUE STAR • Smart Water Management System
+</footer>
+
+</body>
+</html>

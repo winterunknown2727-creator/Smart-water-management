@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Tank Management | Smart Water</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#020814;
+    color:white;
+    min-height:100vh;
+}
+
+/* NAVBAR */
+
+.navbar{
+    min-height:72px;
+    padding:12px 5%;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    background:#031426;
+    border-bottom:2px solid #087cff;
+
+    position:sticky;
+    top:0;
+    z-index:10;
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.logo{
+    width:42px;
+    height:42px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:#06264a;
+    border:2px solid #00ff88;
+    border-radius:12px;
+}
+
+.brand-name{
+    font-weight:bold;
+    font-size:17px;
+}
+
+.team{
+    color:#00ff88;
+    font-size:9px;
+    letter-spacing:2px;
+    margin-top:3px;
+}
+
+.back{
+    color:#8ea7bd;
+    text-decoration:none;
+    font-size:12px;
+}
+
+.back:hover{
+    color:#00ff88;
+}
+
+
+/* MAIN */
+
+.container{
+    width:92%;
+    max-width:1200px;
+    margin:auto;
+    padding:28px 0 50px;
+}
+
+.heading{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+    margin-bottom:25px;
+}
+
+.heading h1{
+    font-size:28px;
+}
+
+.heading p{
+    color:#8099b0;
+    font-size:12px;
+    margin-top:7px;
+}
+
+
+/* ADD BUTTON */
+
+.add-btn{
+    padding:13px 20px;
+
+    border:0;
+    border-radius:11px;
+
+    background:
+    linear-gradient(90deg,#006eff,#00d978);
+
+    color:white;
+
+    font-weight:bold;
+
+    cursor:pointer;
+}
+
+.add-btn:hover{
+    box-shadow:0 0 20px rgba(0,255,136,.25);
+}
+
+
+/* TANK GRID */
+
+.tank-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:18px;
+}
+
+
+/* TANK CARD */
+
+.tank-card{
+    background:#06172a;
+
+    border:1px solid #124c77;
+
+    border-radius:18px;
+
+    padding:22px;
+
+    transition:.2s;
+}
+
+.tank-card:hover{
+    border-color:#00ff88;
+
+    transform:translateY(-2px);
+
+    box-shadow:
+    0 0 22px rgba(0,255,136,.1);
+}
+
+.tank-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    margin-bottom:18px;
+}
+
+.tank-name{
+    font-size:19px;
+}
+
+.tank-id{
+    color:#718ba2;
+    font-size:10px;
+    margin-top:4px;
+}
+
+.status{
+    color:#ffd166;
+    font-size:10px;
+}
+
+.status.online{
+    color:#00ff88;
+}
+
+
+/* WATER */
+
+.water{
+    display:flex;
+    align-items:center;
+    gap:20px;
+    margin-bottom:18px;
+}
+
+.water-circle{
+    width:85px;
+    height:85px;
+
+    border-radius:50%;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border:4px solid #087cff;
+
+    background:#041426;
+
+    color:#00ff88;
+
+    font-size:22px;
+    font-weight:bold;
+}
+
+.water-info{
+    flex:1;
+}
+
+.water-info p{
+    color:#839ab0;
+    font-size:11px;
+    margin-bottom:6px;
+}
+
+.progress{
+    height:9px;
+    background:#10263b;
+    border-radius:20px;
+    overflow:hidden;
+}
+
+.progress-bar{
+    height:100%;
+
+    background:
+    linear-gradient(90deg,#006eff,#00ff88);
+
+    border-radius:20px;
+}
+
+.litres{
+    margin-top:8px;
+    font-size:13px;
+}
+
+
+/* DETAILS */
+
+.details{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+
+    margin-top:15px;
+}
+
+.detail{
+    background:#041426;
+    padding:10px;
+    border-radius:8px;
+}
+
+.detail span{
+    display:block;
+    color:#637c93;
+    font-size:9px;
+    margin-bottom:4px;
+}
+
+.detail strong{
+    font-size:11px;
+}
+
+
+/* CARD BUTTONS */
+
+.card-buttons{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+    margin-top:16px;
+}
+
+.card-btn{
+    padding:10px;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+    font-size:11px;
+
+    color:white;
+}
+
+.view-btn{
+    background:#062b54;
+    border:1px solid #087cff;
+}
+
+.delete-btn{
+    background:#30131a;
+    border:1px solid #ff5968;
+    color:#ff7180;
+}
+
+
+/* EMPTY */
+
+.empty{
+    text-align:center;
+    padding:60px 20px;
+
+    border:1px dashed #235474;
+
+    border-radius:17px;
+
+    color:#718ba2;
+}
+
+
+/* MODAL */
+
+.modal{
+    display:none;
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(0,0,0,.75);
+
+    align-items:center;
+    justify-content:center;
+
+    padding:20px;
+
+    z-index:50;
+}
+
+.modal-box{
+    width:100%;
+    max-width:470px;
+
+    background:#06172a;
+
+    border:2px solid #00ff88;
+
+    border-radius:20px;
+
+    padding:25px;
+}
+
+.modal-box h2{
+    margin-bottom:20px;
+}
+
+.input-group{
+    margin-bottom:14px;
+}
+
+.input-group label{
+    display:block;
+
+    color:#a6bbce;
+
+    font-size:11px;
+
+    margin-bottom:6px;
+}
+
+.input-group input{
+    width:100%;
+
+    padding:12px;
+
+    background:#041426;
+
+    color:white;
+
+    border:1px solid #174d73;
+
+    border-radius:9px;
+
+    outline:none;
+}
+
+.input-group input:focus{
+    border-color:#00ff88;
+}
+
+.modal-buttons{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+
+    margin-top:18px;
+}
+
+.save{
+    padding:13px;
+
+    border:0;
+    border-radius:9px;
+
+    background:linear-gradient(90deg,#006eff,#00d978);
+
+    color:white;
+    font-weight:bold;
+}
+
+.cancel{
+    padding:13px;
+
+    border:1px solid #526d84;
+
+    border-radius:9px;
+
+    background:#091b2d;
+
+    color:white;
+}
+
+
+/* MOBILE */
+
+@media(max-width:750px){
+
+    .heading{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .tank-grid{
+        grid-template-columns:1fr;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- NAVBAR -->
+
+<nav class="navbar">
+
+<div class="brand">
+
+<div class="logo">
+💧
+</div>
+
+<div>
+
+<div class="brand-name">
+SMART WATER
+</div>
+
+<div class="team">
+BLUE STAR
+</div>
+
+</div>
+
+</div>
+
+<a
+href="dashboard.html"
+class="back"
+>
+← Dashboard
+</a>
+
+</nav>
+
+
+<!-- MAIN -->
+
+<main class="container">
+
+
+<div class="heading">
+
+<div>
+
+<h1>
+Tank Management
+</h1>
+
+<p>
+Add and manage multiple water tanks
+</p>
+
+</div>
+
+
+<button
+class="add-btn"
+onclick="openModal()"
+>
+＋ ADD TANK
+</button>
+
+</div>
+
+
+<!-- TANK LIST -->
+
+<div
+id="tankGrid"
+class="tank-grid"
+>
+</div>
+
+
+</main>
+
+
+<!-- ADD TANK MODAL -->
+
+<div
+id="modal"
+class="modal"
+>
+
+<div class="modal-box">
+
+<h2>
+Add New Tank
+</h2>
+
+
+<div class="input-group">
+
+<label>
+Tank Name
+</label>
+
+<input
+type="text"
+id="tankName"
+placeholder="Example: Tank 05"
+>
+
+</div>
+
+
+<div class="input-group">
+
+<label>
+Tank Capacity (Litres)
+</label>
+
+<input
+type="number"
+id="capacity"
+placeholder="Example: 1000"
+>
+
+</div>
+
+
+<div class="input-group">
+
+<label>
+Float Sensor ID
+</label>
+
+<input
+type="text"
+id="sensorId"
+placeholder="Example: SENSOR-05"
+>
+
+</div>
+
+
+<div class="input-group">
+
+<label>
+ESP32 ID
+</label>
+
+<input
+type="text"
+id="espId"
+placeholder="Example: ESP32-05"
+>
+
+</div>
+
+
+<div class="input-group">
+
+<label>
+LoRa ID
+</label>
+
+<input
+type="text"
+id="loraId"
+placeholder="Example: LORA-05"
+>
+
+</div>
+
+
+<div class="modal-buttons">
+
+<button
+class="cancel"
+onclick="closeModal()"
+>
+CANCEL
+</button>
+
+<button
+class="save"
+onclick="addTank()"
+>
+SAVE TANK
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<script>
+
+/*
+Temporary local tank storage.
+
+Later this will be replaced with
+real backend/database storage.
+*/
+
+
+let tanks =
+JSON.parse(localStorage.getItem("blueStarTanks")) || [];
+
+
+/* MODAL */
+
+function openModal(){
+
+    document.getElementById("modal").style.display =
+    "flex";
+
+}
+
+
+function closeModal(){
+
+    document.getElementById("modal").style.display =
+    "none";
+
+}
+
+
+/* ADD TANK */
+
+function addTank(){
+
+    const name =
+    document.getElementById("tankName").value.trim();
+
+    const capacity =
+    document.getElementById("capacity").value;
+
+    const sensor =
+    document.getElementById("sensorId").value.trim();
+
+    const esp =
+    document.getElementById("espId").value.trim();
+
+    const lora =
+    document.getElementById("loraId").value.trim();
+
+
+    if(
+        name === "" ||
+        capacity === "" ||
+        sensor === "" ||
+        esp === "" ||
+        lora === ""
+    ){
+
+        alert(
+            "Please fill all tank details."
+        );
+
+        return;
+    }
+
+
+    const newTank = {
+
+        id:
+        "TANK-" +
+        String(tanks.length + 1)
+        .padStart(2,"0"),
+
+        name:name,
+
+        capacity:Number(capacity),
+
+        sensor:sensor,
+
+        esp:esp,
+
+        lora:lora,
+
+        level:null,
+
+        litres:null,
+
+        connected:false
+
+    };
+
+
+    tanks.push(newTank);
+
+
+    localStorage.setItem(
+        "blueStarTanks",
+        JSON.stringify(tanks)
+    );
+
+
+    clearForm();
+
+    closeModal();
+
+    renderTanks();
+
+}
+
+
+/* CLEAR FORM */
+
+function clearForm(){
+
+    document.getElementById("tankName").value="";
+    document.getElementById("capacity").value="";
+    document.getElementById("sensorId").value="";
+    document.getElementById("espId").value="";
+    document.getElementById("loraId").value="";
+
+}
+
+
+/* RENDER */
+
+function renderTanks(){
+
+    const grid =
+    document.getElementById("tankGrid");
+
+
+    grid.innerHTML="";
+
+
+    if(tanks.length === 0){
+
+        grid.innerHTML = `
+
+        <div class="empty">
+
+        <div style="font-size:40px">
+        💧
+        </div>
+
+        <br>
+
+        No tanks added yet.
+
+        <br><br>
+
+        Press
+        <b>＋ ADD TANK</b>
+        to create your first tank.
+
+        </div>
+
+        `;
+
+        return;
+    }
+
+
+    tanks.forEach(function(tank,index){
+
+        let level =
+        tank.level === null
+        ? "--"
+        : tank.level + "%";
+
+
+        let litres =
+        tank.litres === null
+        ? "--"
+        : tank.litres + " L";
+
+
+        let bar =
+        tank.level === null
+        ? 0
+        : tank.level;
+
+
+        grid.innerHTML += `
+
+        <div class="tank-card">
+
+            <div class="tank-head">
+
+                <div>
+
+                    <div class="tank-name">
+                    ${tank.name}
+                    </div>
+
+                    <div class="tank-id">
+                    ${tank.id}
+                    </div>
+
+                </div>
+
+                <div class="status">
+                ● Waiting
+                </div>
+
+            </div>
+
+
+            <div class="water">
+
+                <div class="water-circle">
+                ${level}
+                </div>
+
+
+                <div class="water-info">
+
+                    <p>
+                    LIVE WATER LEVEL
+                    </p>
+
+                    <div class="progress">
+
+                        <div
+                        class="progress-bar"
+                        style="width:${bar}%"
+                        ></div>
+
+                    </div>
+
+                    <div class="litres">
+                    💧 ${litres}
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="details">
+
+                <div class="detail">
+
+                    <span>
+                    CAPACITY
+                    </span>
+
+                    <strong>
+                    ${tank.capacity} L
+                    </strong>
+
+                </div>
+
+
+                <div class="detail">
+
+                    <span>
+                    FLOAT SENSOR
+                    </span>
+
+                    <strong>
+                    ${tank.sensor}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail">
+
+                    <span>
+                    ESP32
+                    </span>
+
+                    <strong>
+                    ${tank.esp}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail">
+
+                    <span>
+                    LoRa
+                    </span>
+
+                    <strong>
+                    ${tank.lora}
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="card-buttons">
+
+                <button
+                class="card-btn view-btn"
+                onclick="viewTank(${index})"
+                >
+                VIEW TANK
+                </button>
+
+
+                <button
+                class="card-btn delete-btn"
+                onclick="deleteTank(${index})"
+                >
+                DELETE
+                </button>
+
+            </div>
+
+        </div>
+
+        `;
+
+    });
+
+}
+
+
+/* VIEW */
+
+function viewTank(index){
+
+    localStorage.setItem(
+        "selectedTank",
+        index
+    );
+
+    window.location.href =
+    "tank.html";
+
+}
+
+
+/* DELETE */
+
+function deleteTank(index){
+
+    const confirmDelete =
+    confirm(
+        "Delete this tank?"
+    );
+
+
+    if(!confirmDelete){
+        return;
+    }
+
+
+    tanks.splice(index,1);
+
+
+    localStorage.setItem(
+        "blueStarTanks",
+        JSON.stringify(tanks)
+    );
+
+
+    renderTanks();
+
+}
+
+
+renderTanks();
+
+</script>
+
+</body>
+</html>

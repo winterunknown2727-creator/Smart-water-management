@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Hardware Connection | Smart Water Management</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#031522;
+    color:white;
+    min-height:100vh;
+}
+
+nav{
+    height:70px;
+    background:#061d2e;
+    border-bottom:2px solid #00d084;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 7%;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.logo-icon{
+    width:40px;
+    height:40px;
+    background:#00d084;
+    color:#031522;
+    border-radius:12px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:21px;
+}
+
+.logo h2{
+    font-size:18px;
+}
+
+.logo span{
+    color:#00d084;
+}
+
+.nav-right a{
+    color:#a8c0c8;
+    text-decoration:none;
+    margin-left:20px;
+    font-size:14px;
+}
+
+.nav-right a:hover{
+    color:#00d084;
+}
+
+.container{
+    width:86%;
+    max-width:1200px;
+    margin:40px auto;
+}
+
+.back{
+    color:#91aab4;
+    text-decoration:none;
+    font-size:14px;
+}
+
+.back:hover{
+    color:#00d084;
+}
+
+h1{
+    margin-top:15px;
+    font-size:34px;
+}
+
+.subtitle{
+    color:#8ca6b0;
+    margin-top:8px;
+}
+
+.connection-box{
+    margin-top:30px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
+}
+
+.device{
+    background:linear-gradient(145deg,#09283b,#061b2a);
+    border:1px solid #16465a;
+    border-radius:18px;
+    padding:25px;
+    box-shadow:0 15px 35px rgba(0,0,0,.25);
+}
+
+.device-icon{
+    width:55px;
+    height:55px;
+    border-radius:15px;
+    background:#0b3548;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:27px;
+    margin-bottom:18px;
+}
+
+.device h2{
+    font-size:20px;
+}
+
+.device p{
+    color:#849fa9;
+    font-size:13px;
+    margin-top:7px;
+    line-height:1.5;
+}
+
+.status{
+    margin-top:20px;
+    padding:12px;
+    border-radius:10px;
+    background:#151f24;
+    border:1px solid #59656a;
+    color:#c1c9cc;
+    font-size:13px;
+}
+
+.status-dot{
+    display:inline-block;
+    width:9px;
+    height:9px;
+    border-radius:50%;
+    background:#e0a72f;
+    margin-right:7px;
+}
+
+.check-btn{
+    margin-top:15px;
+    width:100%;
+    padding:11px;
+    border-radius:9px;
+    border:1px solid #315361;
+    background:#092332;
+    color:white;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.check-btn:hover{
+    border-color:#00d084;
+    color:#00d084;
+}
+
+.network{
+    margin-top:30px;
+    background:linear-gradient(145deg,#09283b,#061b2a);
+    border:1px solid #16465a;
+    border-radius:18px;
+    padding:25px;
+}
+
+.network h2{
+    margin-bottom:8px;
+}
+
+.network p{
+    color:#8da7b0;
+    font-size:13px;
+    line-height:1.6;
+}
+
+.network-info{
+    margin-top:20px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:15px;
+}
+
+.info{
+    background:#041a27;
+    border:1px solid #173f4e;
+    border-radius:12px;
+    padding:16px;
+}
+
+.info-title{
+    color:#7996a0;
+    font-size:12px;
+}
+
+.info-value{
+    margin-top:7px;
+    color:#e5f2f5;
+    font-weight:bold;
+}
+
+.warning{
+    margin-top:25px;
+    padding:18px;
+    border-left:4px solid #00d084;
+    background:#072433;
+    border-radius:8px;
+    color:#b4cbd2;
+    font-size:13px;
+    line-height:1.6;
+}
+
+.refresh{
+    margin-top:25px;
+    background:#00d084;
+    color:#031522;
+    border:none;
+    padding:13px 20px;
+    border-radius:9px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.refresh:hover{
+    background:#18e99a;
+}
+
+@media(max-width:600px){
+
+    nav{
+        padding:0 5%;
+    }
+
+    .nav-right a{
+        margin-left:8px;
+    }
+
+    .container{
+        width:92%;
+    }
+
+    h1{
+        font-size:28px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+
+    <div class="logo">
+
+        <div class="logo-icon">💧</div>
+
+        <h2>
+            SMART <span>WATER</span>
+        </h2>
+
+    </div>
+
+    <div class="nav-right">
+
+        <a href="dashboard.html">Dashboard</a>
+        <a href="tanks.html">Tanks</a>
+        <a href="motors.html">Motors</a>
+
+    </div>
+
+</nav>
+
+
+<div class="container">
+
+    <a href="dashboard.html" class="back">
+        ← Back to Dashboard
+    </a>
+
+    <h1>Hardware Connection</h1>
+
+    <p class="subtitle">
+        Monitor ESP32, LoRa, sensors and network connectivity
+    </p>
+
+
+    <div class="connection-box">
+
+
+        <!-- ESP32 -->
+
+        <div class="device">
+
+            <div class="device-icon">
+                🧠
+            </div>
+
+            <h2>ESP32 Controller</h2>
+
+            <p>
+                Main controller responsible for reading sensors
+                and controlling the motor system.
+            </p>
+
+            <div class="status">
+                <span class="status-dot"></span>
+                Waiting for Connection
+            </div>
+
+            <button
+                class="check-btn"
+                onclick="checkDevice('ESP32')">
+
+                CHECK CONNECTION
+
+            </button>
+
+        </div>
+
+
+        <!-- LORA -->
+
+        <div class="device">
+
+            <div class="device-icon">
+                📡
+            </div>
+
+            <h2>LoRa Network</h2>
+
+            <p>
+                Wireless communication between tank-side
+                and motor-side ESP32 devices.
+            </p>
+
+            <div class="status">
+                <span class="status-dot"></span>
+                Waiting for Connection
+            </div>
+
+            <button
+                class="check-btn"
+                onclick="checkDevice('LoRa')">
+
+                CHECK CONNECTION
+
+            </button>
+
+        </div>
+
+
+        <!-- SENSOR -->
+
+        <div class="device">
+
+            <div class="device-icon">
+                💧
+            </div>
+
+            <h2>Float Sensor</h2>
+
+            <p>
+                Provides the actual water-level information
+                from the connected tank.
+            </p>
+
+            <div class="status">
+                <span class="status-dot"></span>
+                Waiting for Sensor Data
+            </div>
+
+            <button
+                class="check-btn"
+                onclick="checkDevice('Sensor')">
+
+                CHECK SENSOR
+
+            </button>
+
+        </div>
+
+
+        <!-- MOTOR -->
+
+        <div class="device">
+
+            <div class="device-icon">
+                ⚙️
+            </div>
+
+            <h2>Motor & Relay</h2>
+
+            <p>
+                Relay controls the pump motor and solenoid
+                valve according to system commands.
+            </p>
+
+            <div class="status">
+                <span class="status-dot"></span>
+                Waiting for Hardware
+            </div>
+
+            <button
+                class="check-btn"
+                onclick="checkDevice('Motor')">
+
+                CHECK MOTOR
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- NETWORK -->
+
+    <div class="network">
+
+        <h2>🌐 Network Connection</h2>
+
+        <p>
+            The website must communicate with the ESP32
+            through a reachable network before live data
+            and motor control can work.
+        </p>
+
+
+        <div class="network-info">
+
+            <div class="info">
+
+                <div class="info-title">
+                    Connection
+                </div>
+
+                <div class="info-value">
+                    Waiting
+                </div>
+
+            </div>
+
+
+            <div class="info">
+
+                <div class="info-title">
+                    ESP32 Address
+                </div>
+
+                <div class="info-value">
+                    --
+                </div>
+
+            </div>
+
+
+            <div class="info">
+
+                <div class="info-title">
+                    API Status
+                </div>
+
+                <div class="info-value">
+                    Not Connected
+                </div>
+
+            </div>
+
+
+            <div class="info">
+
+                <div class="info-title">
+                    Live Data
+                </div>
+
+                <div class="info-value">
+                    Waiting
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <button class="refresh" onclick="checkNetwork()">
+            CHECK NETWORK
+        </button>
+
+    </div>
+
+
+    <div class="warning">
+
+        <strong>Important:</strong><br>
+
+        This page does not create a fake hardware connection.
+        Until the real ESP32, LoRa, sensor and motor system
+        are connected and reachable, the status will remain
+        in the waiting state.
+
+    </div>
+
+</div>
+
+
+<script>
+
+function checkDevice(device){
+
+    alert(
+        device +
+        " connection is not available yet.\n\n" +
+        "Connect the real hardware first. " +
+        "The website will later check the ESP32/API status."
+    );
+
+}
+
+
+function checkNetwork(){
+
+    alert(
+        "Network check is ready.\n\n" +
+        "Real ESP32/API connection will be checked after hardware integration."
+    );
+
+}
+
+</script>
+
+</body>
+</html>

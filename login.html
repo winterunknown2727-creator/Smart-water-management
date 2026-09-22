@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Login | Smart Water Management</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+
+    background:
+    radial-gradient(circle at top,#073967 0%,#020814 45%,#01040a 100%);
+
+    color:white;
+}
+
+.login-container{
+    width:100%;
+    max-width:430px;
+}
+
+.back{
+    display:inline-block;
+    margin-bottom:18px;
+    color:#8fa8bf;
+    text-decoration:none;
+    font-size:13px;
+}
+
+.back:hover{
+    color:#00ff88;
+}
+
+.login-box{
+    padding:35px 30px;
+
+    background:rgba(4,18,35,.97);
+
+    border:2px solid #087cff;
+
+    border-radius:24px;
+
+    box-shadow:
+    0 0 25px rgba(0,124,255,.18),
+    0 0 50px rgba(0,255,136,.08);
+}
+
+.team{
+    text-align:center;
+    color:#00ff88;
+    font-size:16px;
+    font-weight:bold;
+    letter-spacing:4px;
+    margin-bottom:18px;
+}
+
+.logo{
+    width:70px;
+    height:70px;
+    margin:auto;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:50%;
+
+    background:#061d38;
+
+    border:3px solid #00ff88;
+
+    box-shadow:0 0 25px rgba(0,255,136,.25);
+
+    font-size:30px;
+}
+
+h1{
+    text-align:center;
+    font-size:25px;
+    margin-top:18px;
+}
+
+.subtitle{
+    text-align:center;
+    color:#849db5;
+    font-size:12px;
+    margin-top:7px;
+    margin-bottom:28px;
+}
+
+.input-group{
+    margin-bottom:18px;
+}
+
+label{
+    display:block;
+    margin-bottom:8px;
+    color:#b8cde0;
+    font-size:13px;
+}
+
+.input-box{
+    position:relative;
+}
+
+input{
+    width:100%;
+    padding:14px 45px 14px 14px;
+
+    background:#061426;
+
+    border:1px solid #18547e;
+
+    border-radius:11px;
+
+    color:white;
+
+    outline:none;
+
+    font-size:14px;
+}
+
+input:focus{
+    border-color:#00ff88;
+
+    box-shadow:
+    0 0 10px rgba(0,255,136,.15);
+}
+
+.eye{
+    position:absolute;
+    right:14px;
+    top:50%;
+    transform:translateY(-50%);
+
+    cursor:pointer;
+
+    color:#00ff88;
+}
+
+.password-rules{
+    margin-top:10px;
+    padding:12px;
+
+    background:#051326;
+
+    border-left:3px solid #00ff88;
+
+    border-radius:8px;
+
+    color:#8199ae;
+
+    font-size:10px;
+
+    line-height:1.7;
+}
+
+.login-btn{
+    width:100%;
+
+    margin-top:5px;
+
+    padding:15px;
+
+    border:0;
+
+    border-radius:11px;
+
+    background:
+    linear-gradient(90deg,#006eff,#00d978);
+
+    color:white;
+
+    font-size:15px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+}
+
+.login-btn:hover{
+    box-shadow:
+    0 0 25px rgba(0,255,136,.3);
+}
+
+.forgot{
+    text-align:center;
+    margin-top:18px;
+}
+
+.forgot a{
+    color:#4ca8ff;
+    text-decoration:none;
+    font-size:12px;
+}
+
+.forgot a:hover{
+    color:#00ff88;
+}
+
+.message{
+    text-align:center;
+    margin-top:14px;
+    font-size:12px;
+}
+
+.error{
+    color:#ff5968;
+}
+
+.success{
+    color:#00ff88;
+}
+
+.security{
+    margin-top:22px;
+
+    padding-top:18px;
+
+    border-top:1px solid #16334e;
+
+    text-align:center;
+
+    color:#60788e;
+
+    font-size:10px;
+}
+
+@media(max-width:480px){
+
+    .login-box{
+        padding:30px 20px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="login-container">
+
+<a href="index.html" class="back">
+← Back to Home
+</a>
+
+
+<div class="login-box">
+
+<div class="team">
+BLUE STAR
+</div>
+
+
+<div class="logo">
+💧
+</div>
+
+
+<h1>
+SMART WATER
+</h1>
+
+
+<div class="subtitle">
+SECURE WATER MANAGEMENT PORTAL
+</div>
+
+
+<!-- USERNAME -->
+
+<div class="input-group">
+
+<label>
+Username
+</label>
+
+<div class="input-box">
+
+<input
+type="text"
+id="username"
+placeholder="Enter your username"
+autocomplete="username"
+>
+
+</div>
+
+</div>
+
+
+<!-- PASSWORD -->
+
+<div class="input-group">
+
+<label>
+Password
+</label>
+
+<div class="input-box">
+
+<input
+type="password"
+id="password"
+placeholder="Enter strong password"
+autocomplete="current-password"
+>
+
+<span
+class="eye"
+onclick="togglePassword()"
+>
+👁
+</span>
+
+</div>
+
+
+<div class="password-rules">
+
+<b>Password requirements:</b><br>
+
+✓ Minimum 12 characters<br>
+✓ At least one uppercase letter<br>
+✓ At least one lowercase letter<br>
+✓ At least one number<br>
+✓ At least one special character
+
+</div>
+
+</div>
+
+
+<button
+class="login-btn"
+onclick="login()"
+>
+LOGIN →
+</button>
+
+
+<div
+id="message"
+class="message"
+></div>
+
+
+<div class="forgot">
+
+<a
+href="#"
+onclick="forgotPassword()"
+>
+Forgot Password?
+</a>
+
+</div>
+
+
+<div class="security">
+🔒 Secure access to the private ESP32 dashboard
+</div>
+
+</div>
+
+</div>
+
+
+<script>
+
+function togglePassword(){
+
+    const password =
+    document.getElementById("password");
+
+    const eye =
+    document.querySelector(".eye");
+
+    if(password.type === "password"){
+
+        password.type = "text";
+
+        eye.textContent = "🙈";
+
+    }else{
+
+        password.type = "password";
+
+        eye.textContent = "👁";
+
+    }
+
+}
+
+
+function login(){
+
+    const username =
+    document.getElementById("username").value.trim();
+
+    const password =
+    document.getElementById("password").value;
+
+    const message =
+    document.getElementById("message");
+
+
+    const strongPassword =
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*(),.?":{}|<>]).{12,}$/;
+
+
+    if(username === ""){
+
+        message.textContent =
+        "Please enter your username.";
+
+        message.className =
+        "message error";
+
+        return;
+    }
+
+
+    if(!strongPassword.test(password)){
+
+        message.textContent =
+        "Password does not meet the security requirements.";
+
+        message.className =
+        "message error";
+
+        return;
+    }
+
+
+    /*
+       IMPORTANT:
+
+       This is only the FRONTEND login.
+
+       Real authentication will later be connected
+       to a backend/server.
+
+       We are NOT storing a real password here.
+    */
+
+
+    message.textContent =
+    "Login successful. Opening dashboard...";
+
+    message.className =
+    "message success";
+
+
+    setTimeout(function(){
+
+        window.location.href =
+        "dashboard.html";
+
+    },800);
+
+}
+
+
+function forgotPassword(){
+
+    alert(
+        "Please contact the BLUE STAR administrator to reset your password."
+    );
+
+}
+
+</script>
+
+</body>
+</html>
